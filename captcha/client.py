@@ -66,6 +66,10 @@ def submit(recaptcha_response, private_key, remoteip):
     response = recaptcha_request(params)
     data = json.loads(response.read().decode("utf-8"))
     response.close()
+    if settings.DEBUG:
+        print("======================")
+        print(data)
+        print("======================")
     return RecaptchaResponse(
         is_valid=data.pop("success"),
         error_codes=data.pop("error-codes", None),
